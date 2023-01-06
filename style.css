@@ -1,0 +1,35 @@
+.gallery {
+
+}
+
+.gallery-photo {
+    display: flex;
+}
+
+.photo, .about {
+   width: 50vw;
+    margin: 2rem;
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.photo img {
+    object-fit: contain;
+    width: 100%;
+}
+
+.gallery-controls img {
+    height: 60px;
+}
+
+.gallery-controls {
+    box-sizing: border-box;
+    padding: 0 2rem;
+    width: 50vw;
+    display: flex;
+    justify-content: space-between;
+}
