@@ -59,14 +59,20 @@ const data = `
         "title": "Moon O'Clock 2022",
         "url": "https://apod.nasa.gov/apod/image/2301/MoonOClock1024.jpg"
     }
-]`
+]`;
+const stars = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const gallery = parseData();
     let i = 0;
+    for (let i = 1; i <= 5; i++) {
+        stars.push(document.querySelector(`.star[data-rate="${i}"]`));
+    }
     showPhoto(i, gallery);
     document.querySelector('.arrow-left').addEventListener('click', previousPhoto);
     document.querySelector('.arrow-right').addEventListener('click', nextPhoto);
+    document.querySelector('.rate').addEventListener('click', rate);
+
 
     function previousPhoto() {
         i--;
@@ -74,12 +80,21 @@ document.addEventListener('DOMContentLoaded', () => {
             i = gallery.length - 1;
         }
         showPhoto(i, gallery);
-    } function nextPhoto() {
+    }
+
+    function nextPhoto() {
         i++;
-        if (i >= gallery.length){
+        if (i >= gallery.length) {
             i = 0;
         }
         showPhoto(i, gallery);
+    }
+
+    function rate({target}) {
+        const rate = target.dataset.rate;
+        const key = gallery[i].date;
+        localStorage.setItem(key, rate);
+        showRating(key);
     }
 })
 
@@ -99,10 +114,24 @@ function showPhoto(i, gallery) {
     description.innerHTML = item.explanation;
     date.innerHTML = item.date;
     showMinis(i, gallery);
+    showRating(item.date);
 }
 
 function showMinis(i, gallery) {
     document.querySelector('.current-photo').src = gallery[i].url;
-    document.querySelector('.previous-photo').src = gallery[(i-1+gallery.length) % gallery.length].url; //сложные расчеты остатка от деления, чтобы перелистывать на нужную фотку
-    document.querySelector('.next-photo').src = gallery[(i+1) % gallery.length].url;
+    document.querySelector('.previous-photo').src = gallery[(i - 1 + gallery.length) % gallery.length].url; //сложные расчеты остатка от деления, чтобы перелистывать на нужную фотку
+    document.querySelector('.next-photo').src = gallery[(i + 1) % gallery.length].url;
 }
+
+function showRating(key) {
+    const rating = Number(localStorage.getItem(key));
+    for (let i = 1; i <= 5; i++) {
+        if (i <= rating) {
+            stars[i - 1].classList.add('star-full');
+        } else {
+            stars[i - 1].classList.remove('star-full')
+        }
+    }
+}
+
+

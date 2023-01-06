@@ -37,3 +37,19 @@
     display: flex;
     justify-content: space-between;
 }
+
+.rate {
+display: flex;
+}
+
+.star {
+    width: 30px;
+    height: 30px;
+    background-image: url("./img/star.png");
+    background-size: contain;
+    margin: 0 5px;
+}
+
+.star-full, .star:hover {
+    background-image: url("./img/star-full.png");
+}
