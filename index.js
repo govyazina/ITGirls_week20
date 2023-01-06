@@ -98,6 +98,11 @@ function showPhoto(i, gallery) {
     title.innerHTML = item.title;
     description.innerHTML = item.explanation;
     date.innerHTML = item.date;
+    showMinis(i, gallery);
+}
 
-
+function showMinis(i, gallery) {
+    document.querySelector('.current-photo').src = gallery[i].url;
+    document.querySelector('.previous-photo').src = gallery[(i-1+gallery.length) % gallery.length].url; //сложные расчеты остатка от деления, чтобы перелистывать на нужную фотку
+    document.querySelector('.next-photo').src = gallery[(i+1) % gallery.length].url;
 }
