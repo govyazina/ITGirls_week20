@@ -61,3 +61,43 @@ const data = `
     }
 ]`
 
+document.addEventListener('DOMContentLoaded', () => {
+    const gallery = parseData();
+    let i = 0;
+    showPhoto(i, gallery);
+    document.querySelector('.arrow-left').addEventListener('click', previousPhoto);
+    document.querySelector('.arrow-right').addEventListener('click', nextPhoto);
+
+    function previousPhoto() {
+        i--;
+        if (i < 0) {
+            i = gallery.length - 1;
+        }
+        showPhoto(i, gallery);
+    } function nextPhoto() {
+        i++;
+        if (i >= gallery.length){
+            i = 0;
+        }
+        showPhoto(i, gallery);
+    }
+})
+
+function parseData() {
+    return JSON.parse(data);
+}
+
+function showPhoto(i, gallery) {
+    const photo = document.querySelector('.photo img')
+    const item = gallery[i];
+    photo.src = item.url;
+    photo.alt = item.title;
+    const title = document.querySelector('.title');
+    const description = document.querySelector('.description');
+    const date = document.querySelector('.date');
+    title.innerHTML = item.title;
+    description.innerHTML = item.explanation;
+    date.innerHTML = item.date;
+
+
+}
