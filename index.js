@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 })
 
 function parseData() {
-    return fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&start_date=2023-01-01')
+    return fetch('https://api.nasa.gov/planetary/apod?api_key=TsXV7xJ8dgIUbZZvzgenlnzrAb0GFvDn8kQQGgEs&start_date=2023-01-01')
         .then(response => response.json());
 }
 
